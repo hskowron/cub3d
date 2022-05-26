@@ -1,0 +1,96 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    math_notes                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lrosch <lrosch@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/05/19 17:09:38 by lrosch            #+#    #+#              #
+#    Updated: 2022/05/19 20:12:58 by lrosch           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+distance between player and projection plane:
+distance.player.plane = (width.plane / 2) / tan(FOV / 2)
+example for width of 320px and FOV of 60 degrees
+(320 / 2) / tan(60 / 2) = 277
+_______________
+
+
+DRAWING WALLS:
+
+notes for: raycasting in koordinatensystem
+--> X
+|
+v
+Y
+_______________
+notes for: horizontal check
+check if ray is cast upwards or cast downwards -> check player angle
+
+getting point.grid.y:
+if ray is up do:
+point.y = (player.y / cubesize) * cubesize - 1
+if ray is down do:
+point.y = (player.y / cubesize) * cubesize + cubesize
+after:
+point.grid.y = point.y / cubesize 
+
+getting point.grid.x
+point.x = player.x + (player.y - point.y) / tan(winkel)
+after:
+point.grid.x = point.x / cubesize
+
+check if point.grid is a wall
+if point.grid is not wall add the X.multiplier and Y.multiplier to the point 
+Y.multiplier for ray up = -cubesize
+Y.multiplier for ray down = cubesize
+
+X.multiplier = cubesize / tan(winkel)
+
+(point.y + y.multiplier) / 64 = point.next.grid.y
+(point.x + x.multiplier) / 64 = point.next.grid.x
+
+^ repeat till you find a wall
+ _______________
+notes for: vertical check
+check if ray is cast right or cast left
+
+getting point.grid.x:
+if ray is right do:
+point.x = (player.x / cubesize) * cubesize + cubesize
+if ray is left do:
+point.x = (player.x / cubesize) * cubesize - 1;
+after:
+point.grid.x = point.x / cubesize
+
+getting point.grid.y:
+point.y = player.y + (player.x - point.x) / tan(winkel)
+after:
+point.grid.y = point.y / cubesize
+
+check if point.grid is a wall if not repeat steps of point.grid + grid.multiplier
+aka
+X.multiplier for ray left = -cubesize
+X.multiplier for ray right = cubesize
+
+Y.multiplier = cubesize / tan(winkel)
+
+(point.y + y.multiplier) / 64 = point.next.grid.y
+(point.x + x.multiplier) / 64 = point.next.grid.x
+_______________
+find distance to wall with point that hit wall:
+length.of.ray = square root((player.x - point.x)² * (player.y - point.y)²)
+_______________
+killing fishbowl effect:
+projection.distance = ray.length * cos(winkel2)
+winkel2 = winkel relativ zum view ray
+also äußerster winkel2 = 30 grad
+_______________
+getting wall height from raycast:
+projected.slice.height = cubesize / ray.length * distance.player.plane
+_______________
+finding the offset for wall textures:
+horizontal.offset = point.y / 64
+vertical.offset = point.x / 64
+_______________
