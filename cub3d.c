@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrosch <lrosch@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hskowron <hskowron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:01:55 by lrosch            #+#    #+#             */
-/*   Updated: 2022/05/20 16:56:26 by lrosch           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:31:54 by hskowron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ int	main(int argc, char **argv)
 		printf("Error\ninvalid input\n");
 		// exit(EXIT_FAILURE);
 	}
+	game.mapInfo = malloc(sizeof(t_mapInfo));
+	game.map_path = ft_strdup(argv[1]);
+	game.map_start = 1;
+	if (!game.mapInfo)
+		exit(EXIT_FAILURE);
+	init_mapInfo(game.mapInfo);
 	check = ft_substr(argv[1], ft_strlen(argv[1] - 4), 4);
 	if (ft_strncmp(check, ".cub", 4))
 	{
@@ -79,7 +85,8 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init();
 	game.wdth = 64;
 	game.hght = 64; 
-	take_input(fd, &game, argv);
+	parsing(fd, &game);
+	// take_input(fd, &game, argv);
 	game.win = mlx_new_window(game.mlx, game.wdth * 8, game.hght * 8, "cub3d");
 	wip_stuff(&game, argv);
 	mlx_loop(game.mlx);

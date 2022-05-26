@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrosch <lrosch@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hskowron <hskowron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 12:14:13 by lrosch            #+#    #+#             */
-/*   Updated: 2022/05/18 14:05:54 by lrosch           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:34:18 by hskowron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 }
 
-int	count_lines(char **argv)
+int	count_lines(char *path)
 {
 	int		lines;
 	char	*str;
 	int		fd;
 
 	lines = 0;
-	fd = open(argv[1], O_RDONLY);
+	fd = open(path, O_RDONLY);
 	while (1)
 	{
 		str = get_next_line(fd);

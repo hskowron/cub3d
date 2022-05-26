@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrosch <lrosch@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hskowron <hskowron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:01:26 by lrosch            #+#    #+#             */
-/*   Updated: 2022/05/24 12:29:35 by lrosch           ###   ########.fr       */
+/*   Updated: 2022/05/26 18:30:06 by hskowron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,22 @@ typedef struct s_or {
 	float y;
 }				t_or;
 
+// struct um beim parsen alles zu speichern
+typedef struct s_mapInfo
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	int		floor;
+	int		ceiling;
+	int		collected;
+}				t_mapInfo;
+
 typedef struct s_game {
+	int		map_start;
+	char	*map_path;
+	t_mapInfo	*mapInfo;
 	char	**map;
 	void	*north;
 	void	*south;

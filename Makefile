@@ -6,8 +6,8 @@ FLAGS =	-Wall -Wextra -Werror
 
 MLX	=	-Lminilibx -lmlx -framework OpenGL -framework AppKit
 
-SRC	=	cub3d.c gnl_utils.c rgb.c utils.c get_wall_images.c \
-		get_ceiling_floor.c free.c wip_stuff.c
+SRC	=	cub3d.c gnl_utils.c rgb.c utils.c get_ceil_flo.c get_walls.c \
+		free.c wip_stuff.c map_parsing.c
 
 OBJECTS:=  $(SRC:c=o)
 
